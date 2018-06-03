@@ -40,18 +40,18 @@
       <el-button type="danger" @click="inputNickName">上链</el-button>
       <el-button type="warning" @click="showRanking">排行榜</el-button>
 
-      <p class="ranking">
+      <p class="ranking" v-if="gamerAddress">
         当前玩家: <br/><br/>
-        {{gamerAddress}}
+        <span>{{gamerAddress}}</span>
       </p>
     </div>
 
-    <el-dialog title="排行榜" :visible.sync="dialogRankingInfoVisible" width="140%" :modal="false">
+    <el-dialog title="排行榜" :visible.sync="dialogRankingInfoVisible" width="60%" :modal="false" :append-to-body="true">
       <el-table :data="rankingList">
         <el-table-column type="index" label="排名" width="80"></el-table-column>
-        <el-table-column property="nickName" label="昵称" width="150"></el-table-column>
+        <el-table-column property="nickName" label="昵称" width="120"></el-table-column>
         <el-table-column property="author" label="玩家地址" width="350"></el-table-column>
-        <el-table-column property="score" label="分数" width="150"></el-table-column>
+        <el-table-column property="score" label="分数" width="120"></el-table-column>
         <el-table-column label="时间" align="">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
@@ -69,11 +69,4 @@
 
 <style lang="less">
   @import './index.less';
-  .el-dialog{
-    width: 140%;
-    margin-top: 15vh;
-    z-index: 999999;
-    position: fixed;
-    margin-left: -20%;
-  }
 </style>

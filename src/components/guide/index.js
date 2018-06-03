@@ -7,15 +7,15 @@ import _ from 'lodash'
 
 
 var Neb = Nebulas.Neb
-var neb = new Neb(new Nebulas.HttpRequest('https://testnet.nebulas.io'))
-// var neb = new Neb(new Nebulas.HttpRequest('https://mainnet.nebulas.io'))
+// var neb = new Neb(new Nebulas.HttpRequest('https://testnet.nebulas.io'))
+var neb = new Neb(new Nebulas.HttpRequest('https://mainnet.nebulas.io'))
 var api = neb.api
 
 // 合约地址 test
-const dappAddress = 'n22J78th2oiX7eL8LS8hgE6n3msLvap3jzB'
+// const dappAddress = 'n22J78th2oiX7eL8LS8hgE6n3msLvap3jzB'
 
 // 合约地址 main
-// const dappAddress = 'n1sbRguE7eZHLfXCCC1RjNMtfv3fjn1DbSy'
+const dappAddress = 'n1y9rqm7po8cbPyXHrxGPybAfLoUqRcZgyC'
 
 
 export default {
@@ -28,7 +28,7 @@ export default {
       nickName: '',
       highestScore: 0, // 本地最高分
       chainScore: 0, // 链上存的分数
-      gamerAddress: localStorage.getItem('gamerAddress') ? localStorage.getItem('gamerAddress') : 'n1LfXbRdcmwxQNeFnB7GA6QYYHEmGQR9t36',
+      gamerAddress: localStorage.getItem('gamerAddress') ? localStorage.getItem('gamerAddress') : '',
       rankingList: [], // 排行榜数据
       currentRow: null
     }
@@ -87,7 +87,12 @@ export default {
     },
     /*查询链上分数*/
     inquireChainScore () {
-      var from = this.gamerAddress
+      var from = ''
+      if (!this.gamerAddress) {
+        from = 'n1MuZcKoAQEx4446rPYWeVb7zxPqskS4tcv'
+      } else {
+        from = this.gamerAddress
+      }
       var value = '0'
       var nonce = '0'
       var gas_price = '1000000'
@@ -126,7 +131,12 @@ export default {
     showRanking () {
       this.dialogRankingInfoVisible = true
 
-      var from = this.gamerAddress
+      var from = ''
+      if (!this.gamerAddress) {
+        from = 'n1MuZcKoAQEx4446rPYWeVb7zxPqskS4tcv'
+      } else {
+        from = this.gamerAddress
+      }
       var value = '0'
       var nonce = '0'
       var gas_price = '1000000'
