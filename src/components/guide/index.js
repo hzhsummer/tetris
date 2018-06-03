@@ -40,7 +40,7 @@ export default {
     QRTitle: () => i18n.QRNotice[lan],
     QRSrc: () =>
       window.location.protocol +
-      '//binaryify.github.io/vue-tetris/static/qr.jpeg'
+      '//hzhsummer.github.io/tetris/static/qr.jpeg'
   },
   mounted() {
     window.addEventListener('resize', this.resize.bind(this), true)
@@ -181,6 +181,11 @@ export default {
     toNasChain () {
       // 上链
       console.log('上链 score', this.highestScore);
+
+      // 取本地分数
+      if (window.localStorage.getItem('VUE_TETRIS')) {
+        this.highestScore = JSON.parse(decodeURIComponent(atob(window.localStorage.getItem('VUE_TETRIS')))).max;
+      }
 
       if (this.highestScore === 0) {
         this.$message({
